@@ -20,6 +20,8 @@ git pull origin main
 
 # Build and start containers
 echo "📦 Building and Starting Containers..."
+# Force rebuild of frontend to pick up ARG changes
+$COMPOSE -f docker-compose.prod.yml build --no-cache frontend
 $COMPOSE -f docker-compose.prod.yml up -d --build
 
 # Run migrations (optional, can be done manually first time)
