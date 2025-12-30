@@ -450,6 +450,37 @@ class ChatAdvisor:
                 field = action.get('field')
                 value = action.get('value')
                 if hasattr(idea, field):
+                    # FIX: Handle 'tags' specifically to avoid "Direct assignment to the reverse side of a related set"
+                    if field == 'tags':
+                        # Convert value to tags block format
+                        tag_list = []
+                        if isinstance(value, list):
+                            tag_list = [{'text': str(v), 'colorIndex': i % 7} for i, v in enumerate(value)]
+                        elif isinstance(value, str):
+                            tag_list = [{'text': v.strip(), 'colorIndex': i % 7} for i, v in enumerate(value.split(',')) if v.strip()]
+                        
+                        # Find existing tags block or create new one
+                        tags_block = None
+                        for b in idea.blocks:
+                            if b.get('type') == 'tags':
+                                tags_block = b
+                                break
+                        
+                        if tags_block:
+                            tags_block['value'] = tag_list
+                        else:
+                            if not idea.blocks:
+                                idea.blocks = []
+                            idea.blocks.append({
+                                "type": "tags",
+                                "name": "برچسب‌ها",
+                                "value": tag_list
+                            })
+                        
+                        idea.save()
+                        return {'success': True, 'message': 'برچسب‌ها بروزرسانی شدند'}
+                    
+                    # Normal field update
                     setattr(idea, field, value)
                     idea.save()
                     return {'success': True, 'message': f'فیلد {field} بروزرسانی شد'}
