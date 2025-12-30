@@ -39,7 +39,16 @@ function EditIdeaModal({ idea, onClose, onUpdate }) {
                 required_skills: idea.required_skills || '',
             });
             // Load blocks from idea
-            setBlocks(idea.blocks || []);
+            let initialBlocks = idea.blocks || [];
+            if (typeof initialBlocks === 'string') {
+                try {
+                    initialBlocks = JSON.parse(initialBlocks);
+                } catch (e) {
+                    console.error('Error parsing blocks:', e);
+                    initialBlocks = [];
+                }
+            }
+            setBlocks(initialBlocks);
         }
 
         document.body.style.overflow = 'hidden';
