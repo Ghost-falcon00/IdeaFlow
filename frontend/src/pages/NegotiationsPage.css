@@ -1,0 +1,439 @@
+/* NegotiationsPage.css - صفحه چت مذاکرات - با پشتیبانی تم */
+
+.negotiations-page {
+    display: flex;
+    height: 100vh;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-family);
+    direction: rtl;
+}
+
+/* ===== Sidebar ===== */
+.negotiations-sidebar {
+    width: 350px;
+    background: var(--color-surface);
+    border-left: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 1.25rem;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.back-link {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: white;
+}
+
+.negotiations-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.sidebar-loading,
+.sidebar-empty {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: var(--color-text-muted);
+}
+
+.sidebar-empty a {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+/* Negotiation Item */
+.negotiation-item {
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--color-border-light);
+    transition: background 0.2s;
+}
+
+.negotiation-item:hover {
+    background: var(--color-surface-hover);
+}
+
+.negotiation-item.active {
+    background: var(--color-primary-light);
+    border-right: 3px solid var(--color-primary);
+}
+
+.negotiation-item.unread {
+    background: var(--color-primary-light);
+}
+
+.negotiation-avatar {
+    width: 48px;
+    height: 48px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.negotiation-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.negotiation-name {
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+}
+
+.negotiation-preview {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.negotiation-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.negotiation-date {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.unread-count {
+    background: var(--color-primary);
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 99px;
+    font-weight: 600;
+}
+
+/* ===== Chat Area ===== */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg);
+}
+
+.chat-empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+}
+
+.chat-empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.chat-empty-state h3 {
+    margin: 0;
+    color: var(--color-text-secondary);
+}
+
+.chat-empty-state p {
+    margin-top: 0.5rem;
+}
+
+/* Chat Header */
+.chat-header {
+    padding: 1rem 1.5rem;
+    background: var(--color-surface);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header__info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.chat-header__avatar {
+    width: 44px;
+    height: 44px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+}
+
+.chat-header__text h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+.chat-header__text span {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.chat-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.deal-info {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.complete-deal-btn {
+    padding: 0.6rem 1.25rem;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.complete-deal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.deal-completed-badge {
+    padding: 0.5rem 1rem;
+    background: rgba(139, 92, 246, 0.2);
+    color: #a78bfa;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* Messages Container */
+.chat-messages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background: var(--color-bg);
+}
+
+.chat-loading,
+.chat-start-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+.prompt-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.chat-start-prompt h4 {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 1.25rem;
+}
+
+.chat-start-prompt p {
+    margin-top: 0.5rem;
+    max-width: 300px;
+}
+
+.messages-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Date Separator */
+.date-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.date-separator span {
+    background: var(--color-surface);
+    padding: 0.35rem 1rem;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+/* Messages */
+.message {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.message--sent {
+    justify-content: flex-start;
+}
+
+.message--received {
+    justify-content: flex-end;
+}
+
+.message__bubble {
+    max-width: 70%;
+    padding: 0.75rem 1rem;
+    border-radius: 16px;
+    position: relative;
+}
+
+.message--sent .message__bubble {
+    background: var(--color-surface);
+    border-bottom-left-radius: 4px;
+}
+
+.message--received .message__bubble {
+    background: var(--gradient-primary);
+    border-bottom-right-radius: 4px;
+}
+
+.message__bubble p {
+    margin: 0;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.message__time {
+    display: block;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 0.25rem;
+    text-align: left;
+}
+
+/* Input Area */
+.chat-input-area {
+    padding: 1rem 1.5rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    gap: 0.75rem;
+}
+
+.chat-input-area input {
+    flex: 1;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 24px;
+    padding: 0.85rem 1.5rem;
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.chat-input-area input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.chat-input-area input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.send-btn {
+    width: 48px;
+    height: 48px;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.send-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.send-btn svg {
+    width: 22px;
+    height: 22px;
+    color: white;
+    transform: rotate(180deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .negotiations-sidebar {
+        width: 100%;
+        position: fixed;
+        z-index: 10;
+    }
+
+    .chat-area {
+        display: none;
+    }
+
+    .negotiations-page.chat-open .negotiations-sidebar {
+        display: none;
+    }
+
+    .negotiations-page.chat-open .chat-area {
+        display: flex;
+    }
+}

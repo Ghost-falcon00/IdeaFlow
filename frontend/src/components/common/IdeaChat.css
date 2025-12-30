@@ -1,0 +1,395 @@
+/* IdeaChat - Premium Chat UI Styles */
+
+.idea-chat-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: chat-fade-in 0.3s ease;
+}
+
+@keyframes chat-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.idea-chat {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    height: 80vh;
+    max-height: 700px;
+    background: linear-gradient(135deg,
+            rgba(25, 25, 40, 0.98) 0%,
+            rgba(15, 15, 30, 0.99) 100%);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+        0 40px 80px rgba(0, 0, 0, 0.5),
+        0 0 120px rgba(99, 102, 241, 0.15);
+    overflow: hidden;
+    animation: chat-slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .idea-chat {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.98) 0%,
+            rgba(248, 250, 252, 0.99) 100%);
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+        0 40px 80px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes chat-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Header */
+.idea-chat__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: rgba(99, 102, 241, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.idea-chat__header-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.idea-chat__avatar {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+.idea-chat__header-info h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+}
+
+.idea-chat__header-info p {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.idea-chat__close {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.idea-chat__close:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+/* Messages Area */
+.idea-chat__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Welcome */
+.idea-chat__welcome {
+    text-align: center;
+    padding: 2rem;
+    margin: auto 0;
+}
+
+.idea-chat__welcome-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.idea-chat__welcome h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+}
+
+.idea-chat__welcome p {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    margin: 0 0 1.5rem;
+}
+
+.idea-chat__suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.idea-chat__suggestions button {
+    padding: 0.6rem 1rem;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 20px;
+    color: var(--color-text);
+    font-size: 0.8rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.idea-chat__suggestions button:hover {
+    background: rgba(99, 102, 241, 0.25);
+    transform: translateY(-1px);
+}
+
+/* Messages */
+.idea-chat__message {
+    max-width: 85%;
+    animation: message-appear 0.3s ease;
+}
+
+@keyframes message-appear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.idea-chat__message--user {
+    align-self: flex-end;
+}
+
+.idea-chat__message--assistant {
+    align-self: flex-start;
+}
+
+.idea-chat__message-content {
+    padding: 0.9rem 1.2rem;
+    border-radius: 18px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.idea-chat__message--user .idea-chat__message-content {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.idea-chat__message--assistant .idea-chat__message-content {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom-left-radius: 4px;
+}
+
+[data-theme="light"] .idea-chat__message--assistant .idea-chat__message-content {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.idea-chat__message-time {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    margin-top: 0.3rem;
+    padding: 0 0.5rem;
+}
+
+.idea-chat__message--user .idea-chat__message-time {
+    text-align: right;
+}
+
+/* Typing Indicator */
+.idea-chat__typing {
+    display: flex;
+    gap: 4px;
+    padding: 0.9rem 1.2rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    border-bottom-left-radius: 4px;
+}
+
+.idea-chat__typing span {
+    width: 8px;
+    height: 8px;
+    background: var(--color-text-muted);
+    border-radius: 50%;
+    animation: typing-bounce 1.4s infinite ease-in-out;
+}
+
+.idea-chat__typing span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.idea-chat__typing span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.idea-chat__typing span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing-bounce {
+
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Input Form */
+.idea-chat__input-form {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem 1.25rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.idea-chat__input-form input {
+    flex: 1;
+    padding: 0.9rem 1.2rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.idea-chat__input-form input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.idea-chat__input-form input::placeholder {
+    color: var(--color-text-muted);
+}
+
+[data-theme="light"] .idea-chat__input-form input {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.idea-chat__send-btn {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.idea-chat__send-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+}
+
+.idea-chat__send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.idea-chat__send-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.idea-chat__send-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Scrollbar */
+.idea-chat__messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.idea-chat__messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.idea-chat__messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.idea-chat__messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
