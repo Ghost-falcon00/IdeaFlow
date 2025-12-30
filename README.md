@@ -5,6 +5,10 @@
 
 **IdeaFlow** is a comprehensive platform designed for entrepreneurs to validate, refine, and trade startup ideas. Powered by Advanced AI (Groq/GPT), it analyzes business concepts, provides actionable feedback, and connects idea owners with potential investors.
 
+[🇮🇷 فارسی (Persian Version)](#-ideaflow---پلتفرم-هوشمند-اعتبارسنجی-ایده)
+
+---
+
 ## ✨ Key Features
 
 ### 🧠 AI Core
@@ -29,101 +33,83 @@
 **Backend:**
 - [Django REST Framework](https://www.django-rest-framework.org/) - Robust API architecture.
 - [PostgreSQL](https://www.postgresql.org/) - High-performance relational database.
-- [Redis](https://redis.io/) (Optional) - Caching and real-time features.
 - [Docker](https://www.docker.com/) - Containerization for consistent environments.
 
 **Frontend:**
 - [React.js](https://reactjs.org/) + [Vite](https://vitejs.dev/) - Lightning fast UI.
-- [Tailwind CSS](https://tailwindcss.com/) (or Custom CSS) - Modern styling.
-- [Axios](https://axios-http.com/) - API integration.
+- [Tailwind CSS](https://tailwindcss.com/) - Modern styling.
 
 **DevOps:**
-- [Nginx](https://nginx.org/) - Reverse proxy and web server.
-- [Docker Compose](https://docs.docker.com/compose/) - Multi-container orchestration.
-- [Certbot](https://certbot.eff.org/) - Automated SSL management.
+- [Nginx](https://nginx.org/) & [Docker Compose](https://docs.docker.com/compose/) - Production orchestration.
+- [Certbot](https://certbot.eff.org/) - Automated SSL.
 
 ---
 
-## 🚀 Getting Started (Local Development)
+## 🚀 Getting Started (English)
 
-1. **Clone the repository**
+1. **Clone & Setup:**
    ```bash
    git clone https://github.com/Ghost-falcon00/IdeaFlow.git
    cd IdeaFlow
+   cp .env.example .env
    ```
-
-2. **Setup Environment**
-   Create a `.env` file in the root directory:
-   ```env
-   DEBUG=True
-   SECRET_KEY=your_secret_key
-   DB_NAME=ideaflow_db
-   DB_USER=postgres
-   DB_PASSWORD=your_password
-   DB_HOST=localhost
-   GROQ_API_KEY=your_api_key
-   ```
-
-3. **Run Backend**
+2. **Run (Docker):**
    ```bash
-   pip install -r requirements.txt
-   python manage.py migrate
-   python manage.py runserver
-   ```
-
-4. **Run Frontend**
-   ```bash
-   cd frontend
-   npm install
-   npm run dev
+   docker-compose up --build
    ```
 
 ---
 
-## 🌐 Deployment (Production)
+<br>
+<div dir="rtl">
 
-This project supports **One-Click Docker Deployment**.
+# 🇮🇷 IdeaFlow - پلتفرم هوشمند اعتبارسنجی ایده
+> **دستیار هوش مصنوعی برای استارتاپ‌ها و کارآفرینان**
 
-1. **Clone on VPS**
-   ```bash
-   git clone https://github.com/Ghost-falcon00/IdeaFlow.git /opt/ideaflow
-   cd /opt/ideaflow
-   ```
+**آیدیا فللو (IdeaFlow)** یک پلتفرم جامع است که به کارآفرینان کمک می‌کند قبل از هزینه کردن، ایده‌های خود را با هوش مصنوعی (AI) اعتبارسنجی کنند و اگر ایده خوبی بود، سرمایه‌گذار جذب کنند.
 
-2. **Configure Production Env**
-   Update `.env` with `DEBUG=False` and production database credentials.
+## 💡 داستان و ایده پروژه
+بسیاری از استارتاپ‌ها شکست می‌خورند چون روی ایده‌ای کار می‌کنند که نیاز بازار نیست یا اجرای آن ممکن نیست.
+**هدف IdeaFlow این است:**
+1.  **جلوگیری از شکست:** هوش مصنوعی ایده شما را بی‌رحمانه نقد می‌کند و امتیاز می‌دهد.
+2.  **رشد:** به شما می‌گوید چطور ایده را بهتر کنید (Pivot).
+3.  **سرمایه:** وقتی ایده پخته شد، آن را در مارکت‌پلیس به سرمایه‌گذاران نشان می‌دهد.
 
-3. **Deploy**
-   ```bash
-   chmod +x deploy.sh
-   ./deploy.sh
-   # This script builds Docker containers, migrates DB, and sets up Nginx.
-   ```
+## 🏗️ مراحل ساخت و توسعه
+این پروژه در ۷ فاز اصلی توسعه داده شده است:
 
-4. **SSL Setup (Auto)**
-   ```bash
-   chmod +x get_cert.sh
-   ./get_cert.sh
-   # Automatically stops web server, gets Certbot certificate, and restarts.
-   ```
+1.  **فاز پایه (MVP):** راه‌اندازی جنگو و ری‌اکت، سیستم احراز هویت و دیتابیس.
+2.  **هوش مصنوعی:** اتصال به مدل‌های زبانی (LLM) برای تحلیل و امتیازدهی به ایده‌ها.
+3.  **چت هوشمند:** ساخت مشاور AI که مثل یک منتور با کاربر چت می‌کند.
+4.  **مارکت‌پلیس:** ساخت فضای خرید و فروش ایده و ارسال درخواست سرمایه‌گذاری.
+5.  **گیمیفیکیشن:** لیدربورد و سیستم رتبه‌بندی کاربران برتر.
+6.  **پیام‌رسان:** سیستم چت ریل‌تایم بین سرمایه‌گذار و صاحب ایده.
+7.  **دیپلوی:** داکرایز کردن و راه‌اندازی امن روی سرور VPS.
 
----
+## 🚀 راهنمای نصب و اجرا
 
-## 🤝 Contributing
+### 1. دانلود پروژه
+```bash
+git clone https://github.com/Ghost-falcon00/IdeaFlow.git
+cd IdeaFlow
+```
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+### 2. اجرا روی سیستم خودتان (Local)
+کافیست فایل `.env` را بسازید و سپس:
+```bash
+# اجرای سریع با داکر
+docker-compose up --build
+```
+سایت روی آدرس `http://localhost:5173` بالا می‌آید.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### 3. اجرا روی سرور (VPS)
+ما اسکریپت‌های خودکار برای دیپلوی نوشته‌ایم. در سرور لینوکس خود وارد پوشه شوید و بزنید:
+```bash
+# دریافت گواهی SSL و دیپلوی خودکار
+chmod +x get_cert.sh && ./get_cert.sh
+```
 
----
-
-## 📝 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+</div>
 
 ---
 
