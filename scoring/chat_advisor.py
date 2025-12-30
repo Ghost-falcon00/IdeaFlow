@@ -441,6 +441,46 @@ class ChatAdvisor:
         cleaned = re.sub(r'\n{3,}', '\n\n', cleaned)
         return cleaned.strip()
     
+    def _update_idea_field(self, idea, field, value):
+        """
+        به روز رسانی یک فیلد ایده با هندل کردن موارد خاص مثل tags
+        """
+        if not hasattr(idea, field):
+            return False
+
+        # FIX: Handle 'tags' specifically to avoid "Direct assignment to the reverse side of a related set"
+        if field == 'tags':
+            # Convert value to tags block format
+            tag_list = []
+            if isinstance(value, list):
+                tag_list = [{'text': str(v), 'colorIndex': i % 7} for i, v in enumerate(value)]
+            elif isinstance(value, str):
+                tag_list = [{'text': v.strip(), 'colorIndex': i % 7} for i, v in enumerate(value.split(',')) if v.strip()]
+            
+            # Find existing tags block or create new one
+            tags_block = None
+            if idea.blocks:
+                for b in idea.blocks:
+                    if b.get('type') == 'tags':
+                        tags_block = b
+                        break
+            
+            if tags_block:
+                tags_block['value'] = tag_list
+            else:
+                if not idea.blocks:
+                    idea.blocks = []
+                idea.blocks.append({
+                    "type": "tags",
+                    "name": "برچسب‌ها",
+                    "value": tag_list
+                })
+            return True # Handled specially
+        
+        # Normal field update
+        setattr(idea, field, value)
+        return True
+    
     def apply_action(self, idea, action):
         """اعمال اکشن روی ایده"""
         action_type = action.get('action')
@@ -449,39 +489,7 @@ class ChatAdvisor:
             if action_type == 'update_field':
                 field = action.get('field')
                 value = action.get('value')
-                if hasattr(idea, field):
-                    # FIX: Handle 'tags' specifically to avoid "Direct assignment to the reverse side of a related set"
-                    if field == 'tags':
-                        # Convert value to tags block format
-                        tag_list = []
-                        if isinstance(value, list):
-                            tag_list = [{'text': str(v), 'colorIndex': i % 7} for i, v in enumerate(value)]
-                        elif isinstance(value, str):
-                            tag_list = [{'text': v.strip(), 'colorIndex': i % 7} for i, v in enumerate(value.split(',')) if v.strip()]
-                        
-                        # Find existing tags block or create new one
-                        tags_block = None
-                        for b in idea.blocks:
-                            if b.get('type') == 'tags':
-                                tags_block = b
-                                break
-                        
-                        if tags_block:
-                            tags_block['value'] = tag_list
-                        else:
-                            if not idea.blocks:
-                                idea.blocks = []
-                            idea.blocks.append({
-                                "type": "tags",
-                                "name": "برچسب‌ها",
-                                "value": tag_list
-                            })
-                        
-                        idea.save()
-                        return {'success': True, 'message': 'برچسب‌ها بروزرسانی شدند'}
-                    
-                    # Normal field update
-                    setattr(idea, field, value)
+                if self._update_idea_field(idea, field, value):
                     idea.save()
                     return {'success': True, 'message': f'فیلد {field} بروزرسانی شد'}
             
@@ -540,13 +548,14 @@ class ChatAdvisor:
             
             elif action_type == 'batch_update':
                 updates = action.get('updates', [])
+                count = 0
                 for update in updates:
                     field = update.get('field')
                     value = update.get('value')
-                    if hasattr(idea, field):
-                        setattr(idea, field, value)
+                    if self._update_idea_field(idea, field, value):
+                        count += 1
                 idea.save()
-                return {'success': True, 'message': f'{len(updates)} تغییر اعمال شد'}
+                return {'success': True, 'message': f'{count} تغییر اعمال شد'}
             
             return {'success': False, 'message': 'اکشن نامعتبر'}
             
